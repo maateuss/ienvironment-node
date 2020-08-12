@@ -1,0 +1,26 @@
+{
+  "name": "ienvironment-node",
+  "version": "0.1.0",
+  "description": "node.js backend for ienvironment",
+  "main": "server.js",
+  "scripts": {
+    "test": "test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maateuss/ienvironment-node.git"
+  },
+  "keywords": [
+    "ienvironment",
+    "iot",
+    "smart",
+    "environments",
+    "node"
+  ],
+  "author": "Mateus Moura Santos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maateuss/ienvironment-node/issues"
+  },
+  "homepage": "https://github.com/maateuss/ienvironment-node#readme"
+}
