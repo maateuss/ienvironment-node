@@ -38,6 +38,5 @@ require("./routes/userroutes.js")(app);
 const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, ()=>{
-    console.log(`${process.env.TESTEDOTENV}`)
     console.log(`Server rodando na porta ${PORT}`);
 });
