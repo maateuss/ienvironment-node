@@ -1,4 +1,5 @@
 const db = require("../models");
+const user = require("../models/user");
 const User = db.users;
 
 exports.create = (req, res) => {
@@ -29,12 +30,32 @@ exports.create = (req, res) => {
 
 
 exports.findAll = (req, res) => {
-  
+    User.find({}).then(data=> {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: err.message || "Some error occurred."
+      });
+    });
 };
 
 
 exports.findOne = (req, res) => {
-  
+    const id = req.params.id;
+
+    User.findById(id).then(data=> {
+      if(!data){
+        res.status(404).send({message: "not found"});
+      }
+      else res.send(data);
+    }).catch(err => {
+      res.status(500).send({
+        message: err.message || "Some error occurred."
+      })
+    }
+      
+    );
 };
 
 

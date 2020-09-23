@@ -1,9 +1,8 @@
 
-
 module.exports = mongoose => {
     var schema = mongoose.Schema(
         {
-            targets: [Schema.Types.ObjectId],
+            targets: [String],
             operator: String,
             description: String,
             topic: String
