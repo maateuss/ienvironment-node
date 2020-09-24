@@ -1,5 +1,4 @@
 const db = require("../models");
-const user = require("../models/user");
 const User = db.users;
 
 exports.create = (req, res) => {
@@ -8,7 +7,6 @@ exports.create = (req, res) => {
         return;
       }
     
-      // Create a User
       const user = new User({
         name: req.body.name,
         email: req.body.email,
@@ -23,7 +21,7 @@ exports.create = (req, res) => {
         .catch(err => {
           res.status(500).send({
             message:
-              err.message || "Some error occurred while creating the Tutorial."
+              err.message || "Some error occurred."
           });
         });
 };
@@ -60,15 +58,50 @@ exports.findOne = (req, res) => {
 
 
 exports.update = (req, res) => {
-  
+  if(!req.body){
+    return res.status(400).send({
+      message: "No Data"
+    });
+  }
+
+  const id = req.params.id;
+
+  User.findByIdAndUpdate(id, req.body, {useFindAndModify: false})
+    .then(data =>{
+      if(!data){
+        res.status(404).send({
+          message: "Id not found"
+        });
+      } else res.send({message: "Updated"})
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error while updating"
+      })
+    });
+
 };
 
 
 exports.delete = (req, res) => {
-  
+    const id = req.params.id;
+    User.findByIdAndRemove(id).then(data => {
+      if (!data){
+        res.status(404).send({
+          message: "not found"
+        });
+      } else {
+        res.send({message: "deleted"});
+      }
+
+    }).catch(err =>{
+      res.status(500).send({
+        message: "Error while deleting"
+      });
+    });
 };
 
 
 exports.deleteAll = (req, res) => {
-  
+    res.status(401).send({message: "forbidden"});
 };

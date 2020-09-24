@@ -33,7 +33,10 @@ app.get("/", (request, response) => {
 
 });
 
+require("./routes/customeventroutes.js")(app);
+require("./routes/environmentroutes.js")(app);
 require("./routes/userroutes.js")(app);
+require("./routes/equipmentroutes.js")(app);
 
 const PORT = process.env.PORT || 8080;
 

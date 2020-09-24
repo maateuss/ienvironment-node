@@ -3,9 +3,8 @@ module.exports = mongoose => {
         {
             name: String,
             description: String,
-            isSensor: Boolean,
-            isActuator: Boolean,
-            Type: String,
+            type: String,
+            entityType: String,
             topic: String
         },
         {
