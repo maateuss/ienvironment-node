@@ -1,5 +1,14 @@
 const db = require("../models");
+const JWT = require("jsonwebtoken");
 const User = db.users;
+
+exports.login = (req, res) => {
+  const id = 'objectid123456780000'
+  var token = JWT.sign( { id }, process.env.SECRET, {
+    expiresIn: 300
+  });
+  return res.json({auth: true, token: token});
+}
 
 exports.create = (req, res) => {
     if (!req.body) {
