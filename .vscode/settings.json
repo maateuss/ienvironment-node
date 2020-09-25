@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/72b152c1-89c7-4b65-acb7-7a4b1308a702/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/ienvironment-restapi",
+    "appService.deploySubpath": "."
+}
