@@ -3,7 +3,7 @@ module.exports = app => {
     const validator = require("../config/jwtvalidator.js");
     var router = require("express").Router();
 
-    router.post("/",validator.validate, user.create);
+    router.post("/", user.create);
     router.get("/",validator.validate, user.findAll);
     router.get("/byid/:id",validator.validate, user.findOne);
     router.put("/:id",validator.validate, user.update);
