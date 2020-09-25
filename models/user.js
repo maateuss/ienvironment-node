@@ -18,10 +18,10 @@ module.exports = mongoose => {
 
         if(!user.isModified("password")) return next();
 
-        bcrypt.genSalt(process.env.SALT_WORK_FACTOR, function(err, salt){
+        bcrypt.genSalt(parseInt(process.env.SALT_WORK_FACTOR), function(err, salt){
             if(err) return next(err);
 
-            bycript.hash(user.password, salt, function(err, hash){
+            bcrypt.hash(user.password, salt, function(err, hash){
                 user.password = hash;
                 next();
             })
