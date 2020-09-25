@@ -3,11 +3,39 @@ const JWT = require("jsonwebtoken");
 const User = db.users;
 
 exports.login = (req, res) => {
-  const id = 'objectid123456780000'
-  var token = JWT.sign( { id }, process.env.SECRET, {
-    expiresIn: 300
-  });
-  return res.json({auth: true, token: token});
+
+  if(!req.body){
+    return res.status(400).send({messsage: "Empty data"});
+  }
+
+  if(!req.body.password || !req.body.login){
+    return res.status(400).send({message: "login or password invalid"});
+  }
+
+  User.findOne({login: req.body.login}, function(err, user){
+    if(err) throw err;
+
+    user.comparePassword(req.body.password, function(err, isMatch){
+      if(err) throw err;
+
+      if(isMatch) {
+        
+        const id = user.id
+        var token = JWT.sign({id} , process.env.SECRET, {
+          expiresIn: 3600
+        })
+
+        return res.json({user: user, auth: true, token: token});
+      }
+    })
+  })
+
+
+  // const id = 'objectid123456780000'
+  // var token = JWT.sign( { id }, process.env.SECRET, {
+  //   expiresIn: 300
+  // });
+  // return res.json({auth: true, token: token});
 }
 
 exports.create = (req, res) => {

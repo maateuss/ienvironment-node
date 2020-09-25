@@ -1,4 +1,4 @@
-const bycript = require("bcrypt")
+const bcrypt = require("bcrypt")
 
 module.exports = mongoose => {
     var schema = mongoose.Schema(
@@ -18,7 +18,7 @@ module.exports = mongoose => {
 
         if(!user.isModified("password")) return next();
 
-        bycript.genSalt(parseInt(process.env.SALT_WORK_FACTOR), function(err, salt){
+        bcrypt.genSalt(process.env.SALT_WORK_FACTOR, function(err, salt){
             if(err) return next(err);
 
             bycript.hash(user.password, salt, function(err, hash){
