@@ -10,4 +10,5 @@ db.users = require("./user.js")(mongoose);
 db.equipments = require("./equipment.js")(mongoose);
 db.environments = require("./environment.js")(mongoose);
 db.customevents = require("./customevent.js")(mongoose);
+db.messages = require("./message.js")(mongoose);
 module.exports = db;
