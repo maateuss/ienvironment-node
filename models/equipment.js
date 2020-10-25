@@ -5,7 +5,9 @@ module.exports = mongoose => {
             description: String,
             type: String,
             entityType: String,
-            topic: String
+            topic: String,
+            connected: {type: Boolean, default: false},
+            currentValue: {type: String, default: ""},
         },
         {
             timestamps: true

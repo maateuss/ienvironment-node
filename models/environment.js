@@ -6,6 +6,8 @@ module.exports = mongoose => {
             description: String,
             equipments: [String],
             events: [String],
+            numberOfEquipments: {type: Number, default: 0},
+            equipmentsOnline: {type: Number, default: 0},
         },
         {
             timestamps: true
