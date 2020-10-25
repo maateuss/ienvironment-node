@@ -8,10 +8,6 @@ const path = require("path");
 
 const app = express();
 
-var corsOptions = {
-  origin: process.env.CORSORIGIN || "http://localhost:8081",
-};
-
 app.use(cors());
 
 app.use(bodyParser.json());
@@ -43,6 +39,7 @@ require("./routes/customeventroutes.js")(app);
 require("./routes/environmentroutes.js")(app);
 require("./routes/userroutes.js")(app);
 require("./routes/equipmentroutes.js")(app);
+require("./routes/messageroutes.js")(app);
 require("./routes/fileroutes")(app);
 
 const PORT = process.env.PORT || 8080;
