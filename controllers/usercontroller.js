@@ -25,7 +25,10 @@ exports.login = (req, res) => {
           expiresIn: 3600
         })
 
-        return res.json({user: user, auth: true, token: token});
+        var date = new Date();
+        date.setTime(date.getTime() + (60*60*1000))
+
+        return res.json({user: user, auth: true, token: token, expirationTime: date});
       }
     })
   })

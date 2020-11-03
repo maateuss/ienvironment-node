@@ -6,7 +6,8 @@ module.exports = mongoose => {
             targets: [String],
             operator: String,
             description: String,
-            topic: String
+            topic: String,
+            enabled: {type: Boolean, default: false}
         },
         {
             timestamps: true
