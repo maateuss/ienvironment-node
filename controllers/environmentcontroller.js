@@ -39,6 +39,18 @@ exports.findAll = (req, res) => {
     });
 };
 
+exports.findActives = (req, res) =>{
+  Environment.find({enabled: true}).then(data=> {
+    res.send(data);
+  })
+  .catch(err => {
+    res.status(500).send({
+      message: err.message || "Some error occurred."
+    });
+  });
+}
+
+
 
 exports.findOne = (req, res) => {
     const id = req.params.id;

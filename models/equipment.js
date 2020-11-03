@@ -8,6 +8,7 @@ module.exports = mongoose => {
             topic: String,
             connected: {type: Boolean, default: false},
             currentValue: {type: String, default: ""},
+            enabled: {type: Boolean, default: false}
         },
         {
             timestamps: true
