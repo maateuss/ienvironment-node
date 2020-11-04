@@ -1,6 +1,6 @@
 const db = require("../models");
 const Equipment = db.equipments;
-
+const Environments = db.environments;
 exports.create = (req, res) => {
     if (!req.body) {
         res.status(400).send({ message: "Content can not be empty!" });
@@ -85,8 +85,39 @@ exports.update = (req, res) => {
 };
 
 
-exports.delete = (req, res) => {
+exports.delete = async (req, res) => {
     const id = req.params.id;
+
+    var environmentsAffected;
+    
+    await Environments.find({'equipments':id}).then(data =>{
+      environmentsAffected = Array.from(data);
+    }).catch(err => {
+      res.status(500).send({
+        message: "Error while searching for affected environments"
+      })
+    })
+
+    environmentsAffected.forEach(element => {
+      element.equipments = element.equipments.filter(function(equip) {
+        return equip != id;
+      });
+      
+      Environments.findByIdAndUpdate(element.id, element, {useFindAndModify: false})
+      .then(data =>{
+        if(!data){
+          res.status(404).send({
+            message: "Id not found for affected environment"
+          });
+        }
+      })
+      .catch(err => {
+        res.status(500).send({
+          message: "Error while updating affected environment"
+        })
+      });
+    });
+
     Equipment.findByIdAndRemove(id).then(data => {
       if (!data){
         res.status(404).send({
