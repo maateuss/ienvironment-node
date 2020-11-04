@@ -1,6 +1,6 @@
-const dbConfig = require('../config/db.config.js');
+const dbConfig = require("../config/db.config.js");
 
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
 
 const db = {};
@@ -11,4 +11,5 @@ db.equipments = require("./equipment.js")(mongoose);
 db.environments = require("./environment.js")(mongoose);
 db.customevents = require("./customevent.js")(mongoose);
 db.messages = require("./message.js")(mongoose);
+db.file = require("./file.js")(mongoose);
 module.exports = db;

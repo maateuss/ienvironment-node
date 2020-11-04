@@ -1,4 +1,3 @@
 module.exports = {
-    url: process.env.DBURL
-    
-}
+  url: process.env.DBURL,
+};

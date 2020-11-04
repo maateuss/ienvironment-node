@@ -1,8 +1,8 @@
-module.exports = app => {
-    const environment = require("../controllers/environmentcontroller.js");
-    const validator = require("../config/jwtvalidator.js");
+module.exports = (app) => {
+  const environment = require("../controllers/environmentcontroller.js");
+  const validator = require("../config/jwtvalidator.js");
 
-    var router = require("express").Router();
+  var router = require("express").Router();
 
     router.post("/",validator.validate, environment.create);
     router.get("/",validator.validate, environment.findAll);
@@ -11,5 +11,5 @@ module.exports = app => {
     router.put("/:id",validator.validate, environment.update);
     router.delete("/:id",validator.validate, environment.delete);
 
-    app.use('/api/environments', router);
-}
+  app.use("/api/environments", router);
+};
