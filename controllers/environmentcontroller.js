@@ -1,5 +1,7 @@
 const db = require("../models");
 const Environment = db.environments;
+const Equipment = db.equipments;
+
 
 exports.create = (req, res) => {
     if (!req.body) {
@@ -38,6 +40,46 @@ exports.findAll = (req, res) => {
       });
     });
 };
+
+
+exports.getFullData = async (req, res) => {
+  try{
+//get all sensors info
+    const id = req.params.id;
+
+    var ambiente = await Environment.findById(id);
+    var sensores = ambiente.equipments;
+    var sensoresData = [];
+    
+    const promises = sensores.map(async (sensorid) =>{
+      var data = await Equipment.findById(sensorid);
+      if(data && data.type == 'Sensor'){
+        sensoresData.push(data);
+      }
+    })
+    
+    await Promise.all(promises);
+
+    var viewModel = { ambienteinfo: ambiente, sensores: sensoresData}
+
+    res.send(viewModel);
+
+
+
+//get chart for last 8 hours
+
+// wrap it all
+  }
+
+  catch(err){
+    res.status(500).send({
+      message:err.message
+    });
+  }
+
+
+
+}
 
 exports.findActives = (req, res) =>{
   Environment.find({enabled: true}).then(data=> {

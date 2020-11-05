@@ -7,6 +7,7 @@ module.exports = mongoose => {
             email: String,
             login: { type: String, required: true, index: {unique: true}},
             password: {type: String, required: true},
+            img: {type: String, default: ""},
             enabled: {type: Boolean, default: false}
         },
         {
