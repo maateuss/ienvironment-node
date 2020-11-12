@@ -27,6 +27,12 @@ exports.findAll = async (req, res) => {
   return res.json(files);
 };
 
+exports.getImageDataById = async(id) =>{
+  const file = await File.findById(id);
+
+  return file;
+}
+
 exports.delete = async (req, res) => {
   const id = req.params.id;
   const file = await File.findById(id);

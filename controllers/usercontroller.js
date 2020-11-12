@@ -1,6 +1,7 @@
 const db = require("../models");
 const JWT = require("jsonwebtoken");
 const User = db.users;
+const Files = require("../controllers/filecontroller");
 
 exports.login = (req, res) => {
 
@@ -47,12 +48,16 @@ exports.create = (req, res) => {
         return;
       }
     
+      var imageFile = await Files.getImageDataById(req.body.img);
+
+
       const user = new User({
         name: req.body.name,
         email: req.body.email,
         login: req.body.login,
         password: req.body.password,
-        enabled: req.body.enabled ? req.body.enabled : false
+        enabled: req.body.enabled ? req.body.enabled : false,
+        img: imageFile
       });
     
       user

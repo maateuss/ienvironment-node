@@ -1,19 +1,25 @@
 const db = require("../models");
 const Equipment = db.equipments;
 const Environments = db.environments;
+const Files = require("../controllers/filecontroller");
+
 exports.create = (req, res) => {
     if (!req.body) {
         res.status(400).send({ message: "Content can not be empty!" });
         return;
       }
     
+      var imageFile = await Files.getImageDataById(req.body.img);
+
+
       const equipment = new Equipment({
         name: req.body.name,
         description: req.body.description,
         type: req.body.type,
         entityType: req.body.entityType,
         topic: req.body.topic,
-        simulationMode: req.body.simulationMode
+        simulationMode: req.body.simulationMode,
+        img: imageFile
       });
     
       equipment
