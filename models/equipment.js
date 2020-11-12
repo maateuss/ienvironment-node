@@ -9,7 +9,9 @@ module.exports = mongoose => {
             connected: {type: Boolean, default: false},
             currentValue: {type: String, default: ""},
             img: {type: String, default: ""},
-            enabled: {type: Boolean, default: false}
+            enabled: {type: Boolean, default: false},
+            simulationMode: {type: Boolean, default: false}
+            
         },
         {
             timestamps: true

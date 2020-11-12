@@ -13,7 +13,9 @@ exports.create = (req, res) => {
         name: req.body.name,
         description: req.body.description,
         equipments: req.body.equipments,
-        events: req.body.events
+        events: req.body.events,
+        img: req.body.img,
+        enabled: req.body.enabled
       });
     
       environment
@@ -44,7 +46,7 @@ exports.findAll = (req, res) => {
 
 exports.getFullData = async (req, res) => {
   try{
-//get all sensors info
+//get all sensors info *done
     const id = req.params.id;
 
     var ambiente = await Environment.findById(id);
@@ -60,15 +62,20 @@ exports.getFullData = async (req, res) => {
     
     await Promise.all(promises);
 
+
+//get chart for last 8 hours
+
+    
+
+// wrap it all
+
     var viewModel = { ambienteinfo: ambiente, sensores: sensoresData}
 
     res.send(viewModel);
 
+  
 
 
-//get chart for last 8 hours
-
-// wrap it all
   }
 
   catch(err){

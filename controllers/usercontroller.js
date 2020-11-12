@@ -52,7 +52,7 @@ exports.create = (req, res) => {
         email: req.body.email,
         login: req.body.login,
         password: req.body.password,
-        active: req.body.active ? req.body.active : false
+        enabled: req.body.enabled ? req.body.enabled : false
       });
     
       user

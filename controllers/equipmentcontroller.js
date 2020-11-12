@@ -12,7 +12,8 @@ exports.create = (req, res) => {
         description: req.body.description,
         type: req.body.type,
         entityType: req.body.entityType,
-        topic: req.body.topic
+        topic: req.body.topic,
+        simulationMode: req.body.simulationMode
       });
     
       equipment
