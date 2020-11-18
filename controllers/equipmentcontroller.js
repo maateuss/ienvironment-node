@@ -3,7 +3,7 @@ const Equipment = db.equipments;
 const Environments = db.environments;
 const Files = require("../controllers/filecontroller");
 
-exports.create = (req, res) => {
+exports.create = async (req, res) => {
     if (!req.body) {
         res.status(400).send({ message: "Content can not be empty!" });
         return;

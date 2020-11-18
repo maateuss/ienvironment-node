@@ -8,7 +8,7 @@ module.exports = mongoose => {
             topic: String,
             connected: {type: Boolean, default: false},
             currentValue: {type: String, default: ""},
-            img: {type: String, default: ""},
+            img: {type: Object, default: null},
             enabled: {type: Boolean, default: false},
             simulationMode: {type: Boolean, default: false}
             

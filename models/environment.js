@@ -8,7 +8,7 @@ module.exports = mongoose => {
             events: [String],
             numberOfEquipments: {type: Number, default: 0},
             equipmentsOnline: {type: Number, default: 0},
-            img: {type: String, default: ""},
+            img: {type: Object, default: null},
             enabled: {type: Boolean, default: false}
         },
         {

@@ -42,7 +42,7 @@ exports.login = (req, res) => {
   // return res.json({auth: true, token: token});
 }
 
-exports.create = (req, res) => {
+exports.create = async (req, res) => {
     if (!req.body) {
         res.status(400).send({ message: "Content can not be empty!" });
         return;

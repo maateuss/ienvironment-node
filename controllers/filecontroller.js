@@ -27,8 +27,11 @@ exports.findAll = async (req, res) => {
   return res.json(files);
 };
 
+
 exports.getImageDataById = async(id) =>{
   const file = await File.findById(id);
+  
+  var parsed = file.toString().replace("_", "");
 
   return file;
 }
