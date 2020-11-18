@@ -23,6 +23,7 @@ module.exports = (mongoose) => {
     }
   });
 
+  
   schema.pre("remove", function () {
     if (process.env.STORAGE_TYPE === "s3") {
       return s3

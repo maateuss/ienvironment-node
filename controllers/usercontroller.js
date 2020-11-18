@@ -1,6 +1,7 @@
 const db = require("../models");
 const JWT = require("jsonwebtoken");
 const User = db.users;
+const Files = require("../controllers/filecontroller");
 
 exports.login = (req, res) => {
 
@@ -41,18 +42,22 @@ exports.login = (req, res) => {
   // return res.json({auth: true, token: token});
 }
 
-exports.create = (req, res) => {
+exports.create = async (req, res) => {
     if (!req.body) {
         res.status(400).send({ message: "Content can not be empty!" });
         return;
       }
     
+      var imageFile = await Files.getImageDataById(req.body.img);
+
+
       const user = new User({
         name: req.body.name,
         email: req.body.email,
         login: req.body.login,
         password: req.body.password,
-        active: req.body.active ? req.body.active : false
+        enabled: req.body.enabled ? req.body.enabled : false,
+        img: imageFile
       });
     
       user

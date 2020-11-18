@@ -1,17 +1,24 @@
 const db = require("../models");
 const Environment = db.environments;
+const Equipment = db.equipments;
+const Files = require("../controllers/filecontroller");
 
-exports.create = (req, res) => {
+exports.create = async (req, res) => {
     if (!req.body) {
         res.status(400).send({ message: "Content can not be empty!" });
         return;
       }
     
+      var imageFile = await Files.getImageDataById(req.body.img);
+
+
       const environment = new Environment({
         name: req.body.name,
         description: req.body.description,
         equipments: req.body.equipments,
-        events: req.body.events
+        events: req.body.events,
+        img: imageFile,
+        enabled: req.body.enabled
       });
     
       environment
@@ -38,6 +45,51 @@ exports.findAll = (req, res) => {
       });
     });
 };
+
+
+exports.getFullData = async (req, res) => {
+  try{
+//get all sensors info *done
+    const id = req.params.id;
+
+    var ambiente = await Environment.findById(id);
+    var sensores = ambiente.equipments;
+    var sensoresData = [];
+    
+    const promises = sensores.map(async (sensorid) =>{
+      var data = await Equipment.findById(sensorid);
+      if(data && data.type == 'Sensor'){
+        sensoresData.push(data);
+      }
+    })
+    
+    await Promise.all(promises);
+
+
+//get chart for last 8 hours
+
+    
+
+// wrap it all
+
+    var viewModel = { ambienteinfo: ambiente, sensores: sensoresData}
+
+    res.send(viewModel);
+
+  
+
+
+  }
+
+  catch(err){
+    res.status(500).send({
+      message:err.message
+    });
+  }
+
+
+
+}
 
 exports.findActives = (req, res) =>{
   Environment.find({enabled: true}).then(data=> {

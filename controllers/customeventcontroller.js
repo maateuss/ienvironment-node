@@ -11,7 +11,8 @@ exports.create = (req, res) => {
         name: req.body.name,
         operator: req.body.operator,
         description: req.body.description,
-        targets: req.body.targets
+        targets: req.body.targets,
+        enabled: req.body.enabled
       });
     
       customevents
