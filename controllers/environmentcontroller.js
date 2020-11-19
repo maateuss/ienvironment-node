@@ -1,6 +1,7 @@
 const db = require("../models");
 const Environment = db.environments;
 const Equipment = db.equipments;
+const CustomEvents = db.customevents;
 const Files = require("../controllers/filecontroller");
 
 exports.create = async (req, res) => {
@@ -48,6 +49,52 @@ exports.findAll = (req, res) => {
 
 
 exports.getFullData = async (req, res) => {
+  try{
+    //get all sensors info *done
+        const id = req.params.id;
+    
+        var ambiente = await Environment.findById(id);
+        var sensores = ambiente.equipments;
+        var sensoresData = [];
+        
+        const promises = sensores.map(async (sensorid) =>{
+          var data = await Equipment.findById(sensorid);
+            sensoresData.push(data);
+        })
+        
+        await Promise.all(promises);
+
+
+        var eventos = ambiente.events;
+        var eventosData = [];
+
+        promises = eventos.map(async (eventoid) => {
+          var data = await CustomEvents.findById(eventoid);
+          eventosData.push(data);
+        });
+
+        await Promise.all(promises);
+    
+    
+    //get chart for last 8 hours
+    
+        
+    
+    // wrap it all
+    
+        var viewModel = { ambienteinfo: ambiente, sensores: sensoresData, eventos: eventosData}
+    
+        res.send(viewModel);
+      }
+      catch(err){
+        res.status(500).send({
+          message:err.message
+        });
+      }
+    
+}
+
+exports.getAllSensors = async (req, res) => {
   try{
 //get all sensors info *done
     const id = req.params.id;
