@@ -10,7 +10,8 @@ module.exports = mongoose => {
             currentValue: {type: String, default: ""},
             img: {type: Object, default: null},
             enabled: {type: Boolean, default: false},
-            simulationMode: {type: Boolean, default: false}
+            simulationMode: {type: Boolean, default: false},
+            script: {type: String}
             
         },
         {

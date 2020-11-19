@@ -10,6 +10,7 @@ module.exports = (app) => {
     router.get("/byid/:id",validator.validate, environment.findOne);
     router.put("/:id",validator.validate, environment.update);
     router.delete("/:id",validator.validate, environment.delete);
+    router.get("/allsensors/:id", validator.validate, environment.getAllSensors);
     router.get("/fulldata/:id", validator.validate, environment.getFullData);
-  app.use("/api/environments", router);
+    app.use("/api/environments", router);
 };

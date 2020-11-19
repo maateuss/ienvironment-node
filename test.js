@@ -50,7 +50,7 @@ let fakerequest = new FakeRequest({
 let fafakerequest = new Object({
     body: {
         ambienteId: '34',
-        start: yesterday,
+        start: yesterday, //var yesterday = new Date()
         end: new Date()
     }
 })
@@ -62,10 +62,10 @@ console.log(fafakerequest.body);
 messageController.findAll(fafakerequest, fakeresponse);
 
 
-function ConvertDate(workingwithdatesonjavascriptsucks) {
-    var dd = String(workingwithdatesonjavascriptsucks.getDate()).padStart(2, '0');
-    var mm = String(workingwithdatesonjavascriptsucks.getMonth() + 1).padStart(2, '0');
-    var yyyy = workingwithdatesonjavascriptsucks.getFullYear();
+function ConvertDate(dateToBeConverted) {
+    var dd = String(dateToBeConverted.getDate()).padStart(2, '0');
+    var mm = String(dateToBeConverted.getMonth() + 1).padStart(2, '0');
+    var yyyy = dateToBeConverted.getFullYear();
 
     return (mm + '-' + dd + '-' + yyyy);
 }
