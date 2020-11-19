@@ -57,7 +57,7 @@ exports.getFullData = async (req, res) => {
         var sensores = ambiente.equipments;
         var sensoresData = [];
         
-        const promises = sensores.map(async (sensorid) =>{
+        var promises = sensores.map(async (sensorid) =>{
           var data = await Equipment.findById(sensorid);
             sensoresData.push(data);
         })
@@ -82,7 +82,7 @@ exports.getFullData = async (req, res) => {
     
     // wrap it all
     
-        var viewModel = { ambienteinfo: ambiente, sensores: sensoresData, eventos: eventosData}
+        var viewModel = { ambienteinfo: ambiente, equipamentos: sensoresData, eventos: eventosData}
     
         res.send(viewModel);
       }

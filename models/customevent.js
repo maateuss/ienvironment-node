@@ -3,10 +3,9 @@ module.exports = mongoose => {
     var schema = mongoose.Schema(
         {
             name: String,
-            targets: [String],
-            operator: String,
             description: String,
             topic: String,
+            script: String,
             enabled: {type: Boolean, default: false}
         },
         {

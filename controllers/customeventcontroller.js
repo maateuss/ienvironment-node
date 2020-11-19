@@ -9,9 +9,9 @@ exports.create = (req, res) => {
     
       const customevents = new CustomEvent({
         name: req.body.name,
-        operator: req.body.operator,
+        topic: req.body.topic,
         description: req.body.description,
-        targets: req.body.targets,
+        script: req.body.script,
         enabled: req.body.enabled
       });
     
