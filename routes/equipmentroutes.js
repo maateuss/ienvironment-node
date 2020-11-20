@@ -4,7 +4,7 @@ module.exports = app => {
 
     var router = require("express").Router();
 
-    router.post("/",validator.validate, equipment.create);
+    router.post("/:id",validator.validate, equipment.create);
     router.get("/",validator.validate, equipment.findAll);
     router.get("/byid/:id",validator.validate, equipment.findOne);
     router.put("/:id",validator.validate, equipment.update);

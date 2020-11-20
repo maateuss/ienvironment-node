@@ -9,6 +9,9 @@ exports.create = async (req, res) => {
         return;
       }
     
+
+      const idAmbiente = req.params.id;
+      
       var imageFile = await Files.getImageDataById(req.body.img);
 
 

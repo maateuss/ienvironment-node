@@ -51,6 +51,8 @@ async function getData(query) {
     
 }
 
+exports.Beautify = (data) => { return beautify(data) };
+exports.BuildQuery = (data) => { return buildQuery(data) };
 
 function beautify(data){
     var formattedData = data.map(entry => { return { sensorId: entry.sensorId, datetime: entry.datetime, value: entry.value } 
