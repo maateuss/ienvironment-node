@@ -9,6 +9,9 @@ exports.create = async (req, res) => {
         return;
       }
     
+
+      const idAmbiente = req.params.id;
+
       var imageFile = await Files.getImageDataById(req.body.img);
 
 
@@ -24,7 +27,7 @@ exports.create = async (req, res) => {
     
       equipment
         .save(equipment)
-        .then(data => {
+        .then(async data => {
 
           var ambiente = await Environments.findById(idAmbiente);
 
