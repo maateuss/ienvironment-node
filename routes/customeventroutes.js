@@ -4,7 +4,7 @@ module.exports = app => {
 
     var router = require("express").Router();
 
-    router.post("/",validator.validate, customevent.create);
+    router.post("/:id",validator.validate, customevent.create);
     router.get("/",validator.validate, customevent.findAll);
     router.get("/byid/:id",validator.validate, customevent.findOne);
     router.put("/:id",validator.validate, customevent.update);
