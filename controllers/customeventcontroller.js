@@ -1,11 +1,17 @@
 const db = require("../models");
 const CustomEvent = db.customevents;
+const Environment = db.environments;
 
-exports.create = (req, res) => {
+exports.create = async (req, res) => {
     if (!req.body) {
         res.status(400).send({ message: "Content can not be empty!" });
         return;
       }
+
+      const idAmbiente = req.params.id;
+
+
+
     
       const customevents = new CustomEvent({
         name: req.body.name,
@@ -17,8 +23,14 @@ exports.create = (req, res) => {
     
       customevents
         .save(customevents)
-        .then(data => {
-          res.send(data);
+        .then(async data => {
+
+          var ambiente = await Environment.findById(idAmbiente);
+
+          ambiente.events.push(data.id);
+          ambiente.save(ambiente).then(result => {
+            res.send(data);
+          });
         })
         .catch(err => {
           res.status(500).send({

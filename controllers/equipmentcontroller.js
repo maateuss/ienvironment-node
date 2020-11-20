@@ -25,7 +25,13 @@ exports.create = async (req, res) => {
       equipment
         .save(equipment)
         .then(data => {
-          res.send(data);
+
+          var ambiente = await Environments.findById(idAmbiente);
+
+          ambiente.equipments.push(data.id);
+          ambiente.save(ambiente).then(result => {
+            res.send(data);
+          });
         })
         .catch(err => {
           res.status(500).send({

@@ -12,7 +12,6 @@ exports.create = async (req, res) => {
     
       var imageFile = await Files.getImageDataById(req.body.img);
 
-
       const environment = new Environment({
         name: req.body.name,
         description: req.body.description,
