@@ -4,7 +4,8 @@ const User = db.users;
 const Files = require("../controllers/filecontroller");
 
 exports.login = (req, res) => {
-
+  try{
+    
   if(!req.body){
     return res.status(400).send({messsage: "Empty data"});
   }
@@ -40,6 +41,9 @@ exports.login = (req, res) => {
   //   expiresIn: 300
   // });
   // return res.json({auth: true, token: token});
+}catch (err){
+  return res.status(400).send({messsage: "Empty data"});
+}
 }
 
 exports.create = async (req, res) => {
